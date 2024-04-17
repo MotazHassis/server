@@ -10,7 +10,7 @@ require('dotenv').config();
 require('./config/mongoose.config')
 const port=process.env.PORT
 
-app.use(cors({credentials: true, origin: 'http://localhost:8001'}));
+app.use(cors({credentials: true, origin: 'https://front-z61r.onrender.com'}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -18,7 +18,7 @@ require('./routes/chat.route')(app);
 const server =app.listen(port, () => console.log(`Listening on port: ${port}`) );
 
 const io = require('socket.io')(server, { cors: {
-    origin: "http://localhost:8001", // This should be the URL of your client
+    origin: "https://front-z61r.onrender.com", // This should be the URL of your client
     methods: ["GET", "POST"],
     credentials: true
 } });
@@ -40,7 +40,7 @@ io.on('connection', socket => {
     // send message to client that he has been successfully connected to server
     socket.on('sendMessage', async () => {
         try {
-            const response = await axios.get('http://localhost:8000/allchatio');
+            const response = await axios.get('https://server-7ujm.onrender.com/allchatio');
             io.emit('receiveMessage', response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
