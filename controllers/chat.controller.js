@@ -36,7 +36,7 @@ const generateUserToken = (userID) => {
 const attachUserAndToken = (res, userToken, user) => {
     res
     .cookie("usertoken", userToken, {
-        httpOnly: true
+        httpOnly: false
     })
     // return specific fields only
     .send({_id: user._id, username: user.username, email: user.email,token:userToken});
